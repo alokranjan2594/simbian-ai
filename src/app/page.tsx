@@ -24,8 +24,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      <Navbar />
-
       {activeSection === "without" && (
         <WithoutSimbian onSwitchSection={() => setActiveSection("with")} />
       )}
@@ -37,7 +35,7 @@ export default function Home() {
             opacity: activeSection === "with" ? 1 : 0,
             display: activeSection === "with" ? "block" : "none",
           }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
           className="w-full"
         >
           <WithSimbian onSwitchSection={() => setActiveSection("without")} />

@@ -7,6 +7,8 @@ import { generateRandomAlert } from "@/lib/alert-utils";
 import { CgLock } from "react-icons/cg";
 import { FiAlertCircle, FiAlertTriangle } from "react-icons/fi";
 import { CiMonitor } from "react-icons/ci";
+import Image from "next/image";
+import { AppAssets } from "@/constant/Assets";
 
 interface WithoutSimbianProps {
   onSwitchSection: () => void;
@@ -167,7 +169,7 @@ export default function WithoutSimbian({
 
           {/* Right side - Title and Alert Cards */}
           <div className="w-full md:w-1/2">
-            <div className="flex flex-col items-end mb-8">
+            <div className="flex flex-col items-end mb-8 gap-y-5">
               <h1 className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
                 Without Simbian
               </h1>
@@ -176,9 +178,14 @@ export default function WithoutSimbian({
               </p>
               <button
                 onClick={onSwitchSection}
-                className="mt-4 bg-white text-blue-600 hover:bg-gray-100 rounded-full px-6"
+                className=" bg-white flex justify-center items-center gap-2 text-blue-600 hover:bg-gray-100 rounded-full p-4 px-6"
               >
-                Book a Demo 🛡️
+                Book a Demo{" "}
+                <Image
+                  src={AppAssets.logo}
+                  alt="simbian-logo"
+                  className="w-5 h-5"
+                />
               </button>
             </div>
 
@@ -210,16 +217,6 @@ export default function WithoutSimbian({
           </div>
         </div>
       </div>
-
-      {/* Vertical arrow indicator */}
-      <motion.div
-        className="absolute right-8 bottom-12 hidden md:flex flex-col items-center"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
-      >
-        <div className="h-32 w-0.5 bg-blue-400/50"></div>
-        <div className="w-3 h-3 border-b-2 border-r-2 border-blue-400 transform rotate-45 mt-2"></div>
-      </motion.div>
     </div>
   );
 }

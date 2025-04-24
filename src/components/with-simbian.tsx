@@ -111,21 +111,11 @@ export default function WithSimbian({ onSwitchSection }: WithSimbianProps) {
 
           {/* Right side - Steps */}
           <div className="w-full md:w-1/2">
-            <div className="flex justify-end mb-8">
-              <button
-                onClick={onSwitchSection}
-                className="bg-white text-blue-600 hover:bg-gray-100 rounded-full px-6"
-              >
-                Book a Demo 🛡️
-              </button>
-            </div>
-
             <div className="relative">
               {/* Vertical line */}
               <div className="absolute left-4 top-8 bottom-8 w-0.5 bg-green-400/50"></div>
 
               {showAllSteps ? (
-                // Show all steps at once
                 <div className="flex flex-col space-y-12">
                   {steps.map((step, index) => (
                     <motion.div
@@ -150,7 +140,6 @@ export default function WithSimbian({ onSwitchSection }: WithSimbianProps) {
                   ))}
                 </div>
               ) : (
-                // Show steps one by one
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentStep}
@@ -182,16 +171,6 @@ export default function WithSimbian({ onSwitchSection }: WithSimbianProps) {
           </div>
         </div>
       </div>
-
-      {/* Vertical arrow indicator */}
-      <motion.div
-        className="absolute right-8 bottom-12 hidden md:flex flex-col items-center"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
-      >
-        <div className="h-32 w-0.5 bg-green-400/50"></div>
-        <div className="w-3 h-3 border-b-2 border-r-2 border-green-400 transform rotate-45 mt-2"></div>
-      </motion.div>
     </div>
   );
 }
