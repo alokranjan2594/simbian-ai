@@ -103,3 +103,58 @@
 .animate-move-to-active {
   animation: moveToActive 1s forwards;
 }
+
+.button-wrapper {
+        background-color: #16294a;
+        padding: 4px;
+        border-radius: 14px;
+      }
+
+      .demo-button {
+        display: flex;
+        align-items: center;
+        background-color: #f0f4f9;
+        color: #000;
+        font-weight: 600;
+        font-size: 16px;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 12px;
+        position: relative;
+        padding-left: 40px;
+      }
+
+      .demo-button::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -15px;
+        width: 48px;
+        height: 100%;
+        background-color: #f0f4f9;
+        transform: skewX(39deg);
+        border-top-left-radius: 22px;
+        border-bottom-left-radius: 12px;
+      }
+      .inclined-navbar::before{
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -38px;
+        width: 70px;
+        height: 100%;
+        background-color: #1F3A8A;
+        transform: skewX(39deg);
+        border-top-left-radius: 22px;
+        border-bottom-left-radius: 12px;
+      }
+      .inclined-navbar{
+        position: relative;
+      }
+
+      .demo-button img {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+      }

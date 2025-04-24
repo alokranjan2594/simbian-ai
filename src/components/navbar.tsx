@@ -8,12 +8,7 @@ export default function Navbar() {
     <nav className="w-full py-4 px-6 flex justify-between items-center bg-transparent absolute top-0 z-50">
       <div className="flex-1 md:flex-none"></div>
 
-      <div
-        style={{
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 10% 100%)",
-        }}
-        className="hidden md:flex justify-end w-[64%] bg-blue-900 p-3 gap-5 items-center rounded-xl"
-      >
+      <div className="hidden inclined-navbar md:flex justify-end w-[60%] bg-blue-900 p-3 gap-5 items-center rounded-r-xl">
         <Image
           src={AppAssets.logo_white}
           alt="logo"
@@ -37,7 +32,7 @@ export default function Navbar() {
           </div>
           <span className="text-white">Blog</span>
         </div>
-        <button
+        {/* <button
           className="relative flex items-center justify-end gap-2 bg-white text-black font-semibold py-3 px-4 w-44 rounded-xl border-2 border-blue-700 hover:bg-gray-100 transition duration-200"
           style={{
             clipPath: "polygon(0 0, 100% 0, 100% 100%, 20% 100%)",
@@ -45,7 +40,17 @@ export default function Navbar() {
         >
           <span>Book a Demo</span>
           <Image src={AppAssets.logo} alt="simbian-logo" className="w-5 h-5" />
-        </button>
+        </button> */}
+        <div className="button-wrapper">
+          <button className="demo-button">
+            Book a Demo
+            <Image
+              src={AppAssets.logo}
+              alt="simbian-logo"
+              className="w-5 h-5"
+            />
+          </button>
+        </div>
       </div>
       <div className="flex justify-between w-full items-center md:hidden">
         <Image
@@ -55,15 +60,16 @@ export default function Navbar() {
           width={1080}
           className="w-36 h-8"
         />
-        <button
-          className="relative flex items-center justify-end gap-2 bg-white text-black font-semibold py-3 px-4 w-44 rounded-xl border-2 border-blue-700 hover:bg-gray-100 transition duration-200"
-          style={{
-            clipPath: "polygon(0 0, 100% 0, 100% 100%, 25% 100%)",
-          }}
-        >
-          <span>Book a Demo</span>
-          <Image src={AppAssets.logo} alt="simbian-logo" className="w-5 h-5" />
-        </button>
+        <div className="button-wrapper">
+          <button className="demo-button">
+            Book a Demo
+            <Image
+              src={AppAssets.logo}
+              alt="simbian-logo"
+              className="w-5 h-5"
+            />
+          </button>
+        </div>
       </div>
     </nav>
   );
