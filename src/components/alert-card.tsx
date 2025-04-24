@@ -56,7 +56,7 @@ export default function AlertCard({
         icons.push(
           <div
             key={`icon-${i}`}
-            className="h-5 w-5 bg-gray-700 rounded flex items-center justify-center"
+            className="h-5 w-5 bg-white text-black rounded flex items-center justify-center"
           >
             {randomIcon}
           </div>

@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import AlertCard from "@/components/alert-card";
-import { generateRandomAlert } from "@/lib/alert-utils";
-import { CgLock } from "react-icons/cg";
-import { FiAlertCircle, FiAlertTriangle } from "react-icons/fi";
-import { CiMonitor } from "react-icons/ci";
-import Image from "next/image";
 import { AppAssets } from "@/constant/Assets";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { BiLoader } from "react-icons/bi";
+import { CgLock } from "react-icons/cg";
+import { CiMonitor } from "react-icons/ci";
+import { FiAlertCircle, FiAlertTriangle, FiZap } from "react-icons/fi";
 
 interface WithoutSimbianProps {
   onSwitchSection: () => void;
@@ -20,10 +20,6 @@ export default function WithoutSimbian({
   const [ignoredAlerts, setIgnoredAlerts] = useState(193);
   const [wronglyClosed, setWronglyClosed] = useState(23);
   const [activeThreats, setActiveThreats] = useState(3);
-
-  const [ignoredAlertsList, setIgnoredAlertsList] = useState<string[]>([]);
-  const [wronglyClosedList, setWronglyClosedList] = useState<string[]>([]);
-  const [activeAlertsList, setActiveAlertsList] = useState<string[]>([]);
 
   const [currentIssue, setCurrentIssue] = useState(0);
   const issues = [
@@ -78,13 +74,11 @@ export default function WithoutSimbian({
     return () => clearInterval(interval);
   }, []);
 
-  // Periodically move alerts from wrongly closed to active threats
   useEffect(() => {
     const interval = setInterval(() => {
       if (wronglyClosed > 0) {
         setWronglyClosed((prev) => prev - 1);
 
-        // Add to active threats after a delay
         setTimeout(() => {
           setActiveThreats((prev) => prev + 1);
         }, 1000);
@@ -93,6 +87,13 @@ export default function WithoutSimbian({
 
     return () => clearInterval(interval);
   }, [wronglyClosed]);
+
+  const iconsArray = [
+    { id: 1, icon: <FiAlertTriangle className="h-6 w-6" /> },
+    { id: 2, icon: <FiAlertCircle className="h-6 w-6" /> },
+    { id: 3, icon: <FiZap className="h-6 w-6" /> },
+    { id: 4, icon: <BiLoader className="h-6 w-6" /> },
+  ];
 
   return (
     <div
@@ -105,32 +106,47 @@ export default function WithoutSimbian({
       <div className="container mx-auto px-4 pt-24 pb-12 relative z-10">
         <div className="flex flex-col md:flex-row items-start justify-between mt-12">
           {/* Left side - Issues */}
-          <div className="w-full md:w-1/2 pr-0 md:pr-8 mb-8 md:mb-0">
+          <div className="w-full md:w-[40%] pr-0 md:pr-8 mb-8 md:mb-0">
             <div className="flex flex-col space-y-6">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentIssue}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="bg-navy-800/80 rounded-lg p-4 flex items-start space-x-4"
-                >
-                  <div className="p-2 bg-navy-700 rounded-full">
-                    {issues[currentIssue].icon}
-                  </div>
-                  <div>
-                    <h3 className="text-white font-medium">
-                      {issues[currentIssue].title}
-                    </h3>
-                    {issues[currentIssue].description && (
-                      <p className="text-gray-300 text-sm">
-                        {issues[currentIssue].description}
-                      </p>
-                    )}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+              <div className="flex ">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentIssue}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-navy-700 opacity-95 rounded-lg p-4 flex items-start space-x-4"
+                  >
+                    <div className="p-2 bg-navy-700 rounded-full">
+                      {issues[currentIssue].icon}
+                    </div>
+                    <div>
+                      <h3 className="text-white font-medium">
+                        {issues[currentIssue].title}
+                      </h3>
+                      {issues[currentIssue].description && (
+                        <p className="text-gray-300 text-sm">
+                          {issues[currentIssue].description}
+                        </p>
+                      )}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    className=" top-1/2 -translate-y-1/2 hidden md:flex flex-row items-center"
+                    animate={{ x: [0, 10, 0] }}
+                    transition={{
+                      repeat: Number.POSITIVE_INFINITY,
+                      duration: 2,
+                    }}
+                  >
+                    <div className="w-10 h-0.5 bg-green-400/50"></div>
+                    <div className="w-3 h-3 border-r-2 border-t-2 border-green-400 transform rotate-45 -ml-1"></div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
               <div className="bg-navy-800/80 rounded-lg p-4 flex items-start space-x-4">
                 <div className="p-2 bg-navy-700 rounded-full">
@@ -165,6 +181,28 @@ export default function WithoutSimbian({
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="flex flex-col justify-start items-center gap-5">
+            <div className="flex flex-col justify-start items-center gap-5 relative">
+              {iconsArray?.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className={` p-2 bg-white rounded flex items-center justify-center`}
+                >
+                  {item.icon}
+                </div>
+              ))}
+            </div>
+
+            <motion.div
+              className=" hidden md:flex flex-col items-center"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
+            >
+              <div className="h-32 w-0.5 bg-green-400/50"></div>
+              <div className="w-3 h-3 border-b-2 border-r-2 border-green-400 transform rotate-45 mt-2"></div>
+            </motion.div>
           </div>
 
           {/* Right side - Title and Alert Cards */}
