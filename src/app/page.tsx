@@ -24,10 +24,10 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      {activeSection === "without" && (
+      {/* {activeSection === "without" && ( */}
         <WithoutSimbian onSwitchSection={() => setActiveSection("with")} />
-      )}
-
+      // )}
+{/* 
       {showWithSection && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -40,7 +40,7 @@ export default function Home() {
         >
           <WithSimbian onSwitchSection={() => setActiveSection("without")} />
         </motion.div>
-      )}
+      )} */}
     </main>
   );
 }

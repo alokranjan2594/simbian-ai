@@ -68,7 +68,7 @@ export default function WithSimbian({ onSwitchSection }: WithSimbianProps) {
   return (
     <div
       style={{ backgroundImage: "url(/images/banner/banner.jpg)" }}
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat relative overflow-hidden"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-blend-soft-light relative overflow-hidden"
     >
       {/* Background image with overlay */}
       <div className="absolute inset-0 bg-cover bg-gradient-to-r from-blue-700 via-blue-400 to-blue-700 bg-center opacity-80"></div>

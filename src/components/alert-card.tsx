@@ -7,6 +7,9 @@ import { motion } from "framer-motion";
 import { GrAid } from "react-icons/gr";
 import { FiAlertCircle, FiAlertTriangle, FiZap } from "react-icons/fi";
 import { BsActivity } from "react-icons/bs";
+import { CiGrid42 } from "react-icons/ci";
+import { GiFlyingTrout } from "react-icons/gi";
+import { TbPlayCardStarFilled } from "react-icons/tb";
 
 interface AlertCardProps {
   title: string;
@@ -19,11 +22,9 @@ interface AlertCardProps {
 
 // Alert icon types
 const alertIcons = [
-  <GrAid key="grid" className="h-3 w-3" />,
-  <FiZap key="zap" className="h-3 w-3" />,
-  <BsActivity key="activity" className="h-3 w-3" />,
-  <FiAlertCircle key="alert-circle" className="h-3 w-3" />,
-  <FiAlertTriangle key="alert-triangle" className="h-3 w-3" />,
+  <CiGrid42 key="grid" className="h-5 w-5" />,
+  <GiFlyingTrout key="zap" className="h-5 w-5" />,
+  <TbPlayCardStarFilled key="activity" className="h-5 w-5" />,
 ];
 
 export default function AlertCard({
@@ -44,7 +45,7 @@ export default function AlertCard({
   useEffect(() => {
     if (zeroState) {
       // For zero state, just show one grid icon
-      setAlertIconsArray([<GrAid key="grid-zero" className="h-3 w-3" />]);
+      setAlertIconsArray([<CiGrid42 key="grid-zero" className="h-3 w-3" />]);
     } else {
       // Generate random number of icons between 5-10
       const numIcons = Math.floor(Math.random() * 6) + 5;
@@ -130,8 +131,8 @@ export default function AlertCard({
     }
   }, [id, title, zeroState, alertIconsArray.length]);
 
-  const bgColor = color === "red" ? "bg-red-900/60" : "bg-blue-900/60";
-  const textColor = color === "red" ? "text-red-400" : "text-blue-400";
+  const bgColor = color === "red" ? "bg-red-900/60" : "bg-blue-950/60";
+  const textColor = color === "red" ? "text-red-400" : "text-blue-300";
   const countColor = zeroState
     ? "text-green-400"
     : color === "red"
@@ -140,7 +141,8 @@ export default function AlertCard({
 
   return (
     <motion.div
-      className={`${bgColor} rounded-lg p-4 overflow-hidden relative`}
+      className={`${bgColor} backdrop-blur-md border border-white/20 shadow-lg 
+              opacity-90 rounded-lg p-8 overflow-hidden relative md:w-[80%]`}
       animate={isShaking ? { x: [0, -3, 3, -3, 3, 0] } : {}}
       transition={{ duration: 0.5 }}
       id={id}
@@ -148,7 +150,7 @@ export default function AlertCard({
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
           <div className={`mr-2 ${textColor}`}>{icon}</div>
-          <h3 className="text-white font-medium">{title}</h3>
+          <h3 className="text-white font-medium text-2xl">{title}</h3>
         </div>
 
         <motion.div
@@ -163,12 +165,12 @@ export default function AlertCard({
       </div>
 
       {/* Alert Icons Row */}
-      <div className="flex flex-wrap gap-1 mt-2">
+      <div className="flex flex-wrap gap-1 mt-2 bg-gray-800 px-2 rounded-lg">
         {alertIconsArray.map((alertIcon, index) => (
           <motion.div
             key={`${id}-alert-${index}`}
             id={`${id}-alert-${index}`}
-            className={`h-5 w-5 bg-gray-700 rounded flex items-center justify-center ${
+            className={`h-7 w-7 bg-white backdrop-blur-sm rounded flex items-center justify-center ${
               showNewAlert && index === newAlertPosition
                 ? "ring-2 ring-blue-400"
                 : ""
