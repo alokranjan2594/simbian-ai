@@ -35,7 +35,7 @@ export default function Home() {
             opacity: activeSection === "with" ? 1 : 0,
             display: activeSection === "with" ? "block" : "none",
           }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.5 }}
           className="w-full"
         >
           <WithSimbian onSwitchSection={() => setActiveSection("without")} />

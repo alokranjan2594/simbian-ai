@@ -45,7 +45,7 @@ export default function AlertCard({
   useEffect(() => {
     if (zeroState) {
       // For zero state, just show one grid icon
-      setAlertIconsArray([<CiGrid42 key="grid-zero" className="h-3 w-3" />]);
+      setAlertIconsArray([]);
     } else {
       // Generate random number of icons between 5-10
       const numIcons = Math.floor(Math.random() * 6) + 5;
@@ -69,22 +69,42 @@ export default function AlertCard({
   }, [zeroState]);
 
   // Animate count changes
+  // useEffect(() => {
+  //   if (count !== displayCount) {
+  //     const step = count > displayCount ? 1 : -1;
+  //     const interval = setInterval(() => {
+  //       setDisplayCount((prev) => {
+  //         if (prev === count) {
+  //           clearInterval(interval);
+  //           return prev;
+  //         }
+  //         return prev + step;
+  //       });
+  //     }, 50);
+
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [count, displayCount]);
+
   useEffect(() => {
-    if (count !== displayCount) {
-      const step = count > displayCount ? 1 : -1;
+    let target = zeroState ? 0 : count;
+
+    if (displayCount !== target) {
+      const step = displayCount > target ? -1 : 1;
+
       const interval = setInterval(() => {
         setDisplayCount((prev) => {
-          if (prev === count) {
+          if (prev === target) {
             clearInterval(interval);
             return prev;
           }
           return prev + step;
         });
-      }, 50);
+      }, 150);
 
       return () => clearInterval(interval);
     }
-  }, [count, displayCount]);
+  }, [count, zeroState, displayCount]);
 
   // Periodically show new alert animation
   useEffect(() => {
@@ -165,7 +185,11 @@ export default function AlertCard({
       </div>
 
       {/* Alert Icons Row */}
-      <div className="flex flex-wrap gap-1 mt-2 bg-gray-800 px-2 rounded-lg">
+      <div
+        className={`flex flex-wrap gap-1 mt-2 bg-green-300/5 backdrop-blur-sm  px-2 ${
+          zeroState ? "h-5" : ""
+        } rounded-lg`}
+      >
         {alertIconsArray.map((alertIcon, index) => (
           <motion.div
             key={`${id}-alert-${index}`}
