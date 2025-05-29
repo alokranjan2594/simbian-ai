@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "app.chilld.de",
+      "package_name": "app.chilld.de",
+      "sha256_cert_fingerprints": [
+        "2B:DF:8E:83:AD:D3:1A:43:F9:72:06:A5:38:96:BD:67:DB:9B:12:C7:72:C6:E0:64:5F:D7:5A:AE:D2:09:AF:B5"
+      ]
+    }
+  }
+]
